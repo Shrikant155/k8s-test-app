@@ -13,6 +13,9 @@ stages {
   stage("deploy-to-minikube") {
     steps {
       sh '''
+           minikube start --driver=docker
+           minikube image load py-k8s-app:latest
+
           kubectl apply -f deployment.yml
           kubectl apply -f service.yml
           minikube service py-k8s-app-service

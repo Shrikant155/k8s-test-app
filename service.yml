@@ -8,10 +8,10 @@ spec:
   selector:
    app: py-k8s-app
    
-   ports:
-     - protocol: TCP
-       port:  5000
-       targetPort: 5000
-       nodePort: 30050
+  ports:
+    - protocol: TCP
+      port:  5000
+      targetPort: 5000
+      nodePort: 30050
       
  
