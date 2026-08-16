@@ -18,7 +18,7 @@ stages {
 
           kubectl apply -f deployment.yml
           kubectl apply -f service.yml
-#          minikube service py-k8s-app-service
+           minikube service py-k8s-app-service --url
          '''
     }
 
@@ -30,7 +30,7 @@ stages {
     mail to: "shrikantdevops999@gmail.com",
          subject: "successful :${JOB_NAME}",
          body: "jobname: ${JOB_NAME} buildno=${BUILD_NUMBER} url=${BUILD_URL}"
-         sh 'minikube service py-k8s-app-service'
+         
 
   }
   failure {
