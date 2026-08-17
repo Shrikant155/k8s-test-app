@@ -19,7 +19,8 @@ stages {
 
           kubectl apply -f deployment.yml
           kubectl apply -f service.yml
-#           minikube service py-k8s-app-service --url
+            kubectl --wait=condition=ready pod -l app=py-k8s-app --timeout=120s
+         minikube service py-k8s-app-service --url
          '''
     }
 
