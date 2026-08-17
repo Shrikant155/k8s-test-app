@@ -19,7 +19,7 @@ stages {
 
           kubectl apply -f deployment.yml
           kubectl apply -f service.yml
-           minikube service py-k8s-app-service --url
+#           minikube service py-k8s-app-service --url
          '''
     }
 
