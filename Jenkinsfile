@@ -13,6 +13,7 @@ stages {
   stage("deploy-to-minikube") {
     steps {
       sh '''
+           minikube delete || true
            minikube start --driver=docker
            minikube image load py-k8s-app:latest
 
