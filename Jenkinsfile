@@ -41,7 +41,7 @@ stages {
     sh '''
            minikube delete || true
            minikube start --driver=docker
-
+          
          #minikube status || minikube start --driver=docker
         # minikube image load  py-k8s-app:latest
        '''
@@ -58,7 +58,7 @@ stages {
      sh '''
        kubectl apply -f k8s-ymls/dev/deployment.yml
           kubectl apply -f k8s-ymls/dev/service.yml
-         
+         kubectl wait --for=condition=ready pod -l app=py-k8s-app -n dev --timeout=120s
         '''
 
      }
@@ -68,7 +68,7 @@ stage("prod-deploy") {
      sh '''
        kubectl apply -f k8s-ymls/prod/deployment.yml
           kubectl apply -f k8s-ymls/prod/service.yml
-
+      kubectl wait --for=condition=ready pod -l app=py-k8s-app -n prod --timeout=120s
         '''
 
      }
@@ -78,7 +78,7 @@ stage("prod-deploy") {
      sh '''
        kubectl apply -f k8s-ymls/staging/deployment.yml
           kubectl apply -f k8s-ymls/staging/service.yml
-
+          kubectl wait --for=condition=ready pod -l app=py-k8s-app -n staging --timeout=120s
         '''
 
      }
@@ -89,7 +89,7 @@ stage("prod-deploy") {
      sh '''
        kubectl apply -f k8s-ymls/qa/deployment.yml
           kubectl apply -f k8s-ymls/qa/service.yml
-
+        kubectl wait --for=condition=ready pod -l app=py-k8s-app -n qa --timeout=120s
         '''
 
      }
