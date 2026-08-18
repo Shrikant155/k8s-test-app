@@ -10,21 +10,93 @@ stages {
 
     }
   }
-  stage("deploy-to-minikube") {
+/*  stage("deploy-to-minikube") {
     steps {
       sh '''
            minikube delete || true
            minikube start --driver=docker
            minikube image load py-k8s-app:latest
+          kubectl apply -f k8s-ymls/namespaces.yml
 
-          kubectl apply -f deployment.yml
-          kubectl apply -f service.yml
+          kubectl apply -f k8s-ymls/dev/deployment.yml
+          kubectl apply -f k8s-ymls/dev/service.yml
+          kubectl apply -f k8s-ymls/prod/deployment.yml
+          kubectl apply -f k8s-ymls/prod/service.yml
+
+  kubectl apply -f k8s-ymls/staging/deployment.yml
+          kubectl apply -f k8s-ymls/staging/service.yml
+
+
+ kubectl apply -f k8s-ymls/qa/deployment.yml
+          kubectl apply -f k8s-ymls/qa/service.yml
+
             kubectl wait --for=condition=ready pod -l app=py-k8s-app --timeout=120s
          minikube service py-k8s-app-service --url
          '''
     }
 
+  }*/
+  stage("minikube start") {
+   steps {
+    sh '''
+         minikube status || minikube start --driver=docker
+         minikube image load  py-k8s-app:latest
+       '''
+   }
   }
+
+   stage("createnamespace")  {
+      steps {
+        sh ' kubectl apply -f k8s-ymls/namespaces.yml' 
+      }
+   }
+   stage("dev-deploy") {
+     steps {
+     sh '''
+       kubectl apply -f k8s-ymls/dev/deployment.yml
+          kubectl apply -f k8s-ymls/dev/service.yml
+         
+        '''
+
+     }
+   }
+stage("prod-deploy") {
+     steps {
+     sh '''
+       kubectl apply -f k8s-ymls/prod/deployment.yml
+          kubectl apply -f k8s-ymls/prod/service.yml
+
+        '''
+
+     }
+   }
+    stage("staging-deploy") {
+     steps {
+     sh '''
+       kubectl apply -f k8s-ymls/staging/deployment.yml
+          kubectl apply -f k8s-ymls/staging/service.yml
+
+        '''
+
+     }
+   }
+
+   stage("qa-deploy") {
+     steps {
+     sh '''
+       kubectl apply -f k8s-ymls/qa/deployment.yml
+          kubectl apply -f k8s-ymls/qa/service.yml
+
+        '''
+
+     }
+   }
+
+
+
+      
+     
+      
 
 }
  post {

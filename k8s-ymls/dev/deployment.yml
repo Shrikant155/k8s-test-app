@@ -16,7 +16,7 @@ spec:
    spec:
     containers:
        - name: py-k8s-app
-         image: py-k8s-app:latest
-         imagePullPolicy: Never
+         image: shrikant155/py-k8s-app:latest
+         imagePullPolicy: Always
          ports:
           - containerPort: 5000
