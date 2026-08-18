@@ -58,7 +58,7 @@ stages {
      sh '''
        kubectl apply -f k8s-ymls/dev/deployment.yml
           kubectl apply -f k8s-ymls/dev/service.yml
-         kubectl wait --for=condition=ready pod -l app=py-k8s-app  --timeout=340s -n dev
+         kubectl wait --for=condition=ready pod -l app=py-k8s-app   --timeout=340s -n dev 
         '''
 
      }
@@ -68,7 +68,7 @@ stage("prod-deploy") {
      sh '''
        kubectl apply -f k8s-ymls/prod/deployment.yml
           kubectl apply -f k8s-ymls/prod/service.yml
-      kubectl wait --for=condition=ready pod -l app=py-k8s-app  --timeout=340s -n prod
+      kubectl wait --for=condition=ready pod -l app=py-k8s-app  -n prod  --timeout=340s 
         '''
 
      }
