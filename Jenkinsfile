@@ -58,7 +58,7 @@ stages {
      sh '''
        kubectl apply -f k8s-ymls/dev/deployment.yml
           kubectl apply -f k8s-ymls/dev/service.yml
-         kubectl wait --for=condition=ready pod -l app=py-k8s-app -n dev  --timeout=340s  
+         kubectl wait --for=condition=ready pod -l app=py-k8s-app   --timeout=340s  -n dev   
         '''
 
      }
@@ -68,7 +68,7 @@ stage("prod-deploy") {
      sh '''
        kubectl apply -f k8s-ymls/prod/deployment.yml
           kubectl apply -f k8s-ymls/prod/service.yml
-      kubectl wait --for=condition=ready pod -l app=py-k8s-app  -n prod  --timeout=340s 
+      kubectl wait --for=condition=ready pod -l app=py-k8s-app    --timeout=340s -n dev  
         '''
 
      }
@@ -78,7 +78,7 @@ stage("prod-deploy") {
      sh '''
        kubectl apply -f k8s-ymls/staging/deployment.yml
           kubectl apply -f k8s-ymls/staging/service.yml
-          kubectl wait --for=condition=ready pod -l app=py-k8s-app  -n staging --timeout=340s  
+          kubectl wait --for=condition=ready pod -l app=py-k8s-app   --timeout=340s -n staging  
         '''
 
      }
@@ -89,7 +89,7 @@ stage("prod-deploy") {
      sh '''
        kubectl apply -f k8s-ymls/qa/deployment.yml
           kubectl apply -f k8s-ymls/qa/service.yml
-        kubectl wait --for=condition=ready pod -l app=py-k8s-app -n qa  --timeout=340s  
+        kubectl wait --for=condition=ready pod -l app=py-k8s-app   --timeout=340s  -n qa  
         '''
 
      }
