@@ -39,8 +39,11 @@ stages {
   stage("minikube start") {
    steps {
     sh '''
-         minikube status || minikube start --driver=docker
-         minikube image load  py-k8s-app:latest
+           minikube delete || true
+           minikube start --driver=docker
+
+         #minikube status || minikube start --driver=docker
+        # minikube image load  py-k8s-app:latest
        '''
    }
   }
