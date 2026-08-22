@@ -109,10 +109,10 @@ stage("prod-deploy") {
  
          kubectl apply -f k8s-ymls/namespaces.yml || true 
  
-         helm upgrade --install py-app-release  k8s-ymls/dev/mychart/ -n dev           
-                  helm upgrade --install py-prod-app-release  k8s-ymls/dev/mychart/ -n prod
-           helm upgrade --install py-staging-app-release  k8s-ymls/dev/mychart/ -n staging
-         helm upgrade --install py-qa-app-release  k8s-ymls/dev/mychart/ -n qa
+         helm upgrade --install py-dev-app  k8s-ymls/dev/mychart/ -n dev  -f k8s-ymls/dev/mychart/values-dev.yaml
+                  helm upgrade --install py-prod-app  k8s-ymls/dev/mychart/ -n prod  -f k8s-ymls/dev/mychart/values-prod.yaml
+           helm upgrade --install py-staging-app  k8s-ymls/dev/mychart/ -n staging  -f k8s-ymls/dev/mychart/values-staging.yaml
+         helm upgrade --install py-qa-app  k8s-ymls/dev/mychart/ -n qa  -f k8s-ymls/dev/mychart/values-qa.yaml
 
 
        '''
