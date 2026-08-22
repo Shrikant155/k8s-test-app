@@ -16,7 +16,7 @@ stages {
            minikube delete || true
            minikube start --driver=docker
            minikube image load py-k8s-app:latest
-          kubectl apply -f k8s-ymls/namespaces.yml
+           kubectl apply -f k8s-ymls/namespaces.yml
 
           kubectl apply -f k8s-ymls/dev/deployment.yml
           kubectl apply -f k8s-ymls/dev/service.yml
@@ -53,7 +53,8 @@ stages {
         sh ' kubectl apply -f k8s-ymls/namespaces.yml' 
       }
    }
-   stage("dev-deploy") {
+
+/*   stage("dev-deploy") {
      steps {
      sh '''
        kubectl apply -f k8s-ymls/dev/deployment.yml
@@ -93,8 +94,20 @@ stage("prod-deploy") {
         '''
 
      }
-   }
+   } */
 
+   stage("deploy-via-helm") {
+     steps {
+       sh '''
+          minikube status || minikube start
+          kubectl apply -f k8s-ymls/namespaces.yml || true 
+         helm upgrade --install py-app-release  k8s-ymls/dev/mychart/ -n dev          
+         '''
+     }
+
+
+   }
+ 
 
 
       

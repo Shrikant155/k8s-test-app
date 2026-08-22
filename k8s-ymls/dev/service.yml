@@ -4,7 +4,7 @@ metadata:
  name: py-k8s-app-service
  namespace: dev
 spec:
-  type: NodePort
+  type: ClusterIP
   selector:
    app: py-k8s-app
    
@@ -12,6 +12,6 @@ spec:
     - protocol: TCP
       port:  5000
       targetPort: 5000
-      nodePort: 30050
+      # nodePort: 30050
       
  
