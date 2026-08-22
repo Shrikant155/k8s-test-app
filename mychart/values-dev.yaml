@@ -173,7 +173,7 @@ tolerations: []
 
 affinity: {}
 persistence:
-  claimName: my-app-pvc
+  claimName: dev-app-pvc
   accessMode: ReadWriteOnce
   size: 1Gi
   storageClassName: standard
