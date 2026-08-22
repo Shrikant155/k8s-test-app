@@ -35,8 +35,8 @@ stages {
          '''
     }
 
-  }*/
-/*  stage("minikube start") {
+  }
+  stage("minikube start") {
    steps {
     sh '''
            minikube delete || true
@@ -46,7 +46,7 @@ stages {
         # minikube image load  py-k8s-app:latest
        '''
    }
-  } */
+  } 
 
    stage("createnamespace")  {
       steps {
@@ -54,7 +54,7 @@ stages {
       }
    }
 
-/*   stage("dev-deploy") {
+   stage("dev-deploy") {
      steps {
      sh '''
        kubectl apply -f k8s-ymls/dev/deployment.yml
