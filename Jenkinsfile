@@ -105,8 +105,8 @@ stage("prod-deploy") {
               --for=condition=ready pod \
               --selector=app.kubernetes.io/component=controller \
               --timeout=120s
-
- 
+         sleep 15
+        
          kubectl apply -f k8s-ymls/namespaces.yml || true 
  
          helm upgrade --install py-dev-app  k8s-ymls/dev/mychart/ -n dev  -f k8s-ymls/dev/mychart/values-dev.yaml
