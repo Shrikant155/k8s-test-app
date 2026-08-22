@@ -149,9 +149,9 @@ autoscaling:
 
 # Additional volumes on the output Deployment definition.
 volumes: 
-  - name: my-storage
+  - name: staging-app-storage
     persistentVolumeClaim: 
-      claimName: my-app-pvc
+      claimName: staging-app-pvc
 
 # - name: foo
 #   secret:
@@ -160,7 +160,7 @@ volumes:
 
 # Additional volumeMounts on the output Deployment definition.
 volumeMounts: 
-  - name: my-storage
+  - name: staging-app--storage
     mountPath: "/app/data"
 
 # - name: foo
