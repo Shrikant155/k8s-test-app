@@ -160,7 +160,7 @@ volumes:
 
 # Additional volumeMounts on the output Deployment definition.
 volumeMounts: 
-  - name: staging-app--storage
+  - name: staging-app-storage
     mountPath: "/app/data"
 
 # - name: foo
