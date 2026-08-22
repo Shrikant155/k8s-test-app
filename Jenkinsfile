@@ -100,6 +100,7 @@ stage("prod-deploy") {
      steps {
        sh '''
           minikube status || minikube start
+           minikube addons enable ingress 
           kubectl apply -f k8s-ymls/namespaces.yml || true 
          helm upgrade --install py-app-release  k8s-ymls/dev/mychart/ -n dev          
          '''
