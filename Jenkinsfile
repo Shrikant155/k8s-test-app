@@ -107,12 +107,12 @@ stage("prod-deploy") {
               --timeout=120s
          sleep 15
         
-         kubectl apply -f k8s-ymls/namespaces.yml || true 
+         kubectl apply -f namespaces.yml || true 
  
-         helm upgrade --install py-dev-app  k8s-ymls/dev/mychart/ -n dev  -f k8s-ymls/dev/mychart/values-dev.yaml
-                  helm upgrade --install py-prod-app  k8s-ymls/dev/mychart/ -n prod  -f k8s-ymls/dev/mychart/values-prod.yaml
-           helm upgrade --install py-staging-app  k8s-ymls/dev/mychart/ -n staging  -f k8s-ymls/dev/mychart/values-staging.yaml
-         helm upgrade --install py-qa-app  k8s-ymls/dev/mychart/ -n qa  -f k8s-ymls/dev/mychart/values-qa.yaml
+         helm upgrade --install py-dev-app  mychart/ -n dev  -f mychart/values-dev.yaml
+                  helm upgrade --install py-prod-app  mychart/ -n prod  -f mychart/values-prod.yaml
+           helm upgrade --install py-staging-app  mychart/ -n staging  -f mychart/values-staging.yaml
+         helm upgrade --install py-qa-app  mychart/ -n qa  -f mychart/values-qa.yaml
 
 
        '''
