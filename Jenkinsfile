@@ -36,7 +36,7 @@ stages {
     }
 
   }*/
-  stage("minikube start") {
+/*  stage("minikube start") {
    steps {
     sh '''
            minikube delete || true
@@ -46,7 +46,7 @@ stages {
         # minikube image load  py-k8s-app:latest
        '''
    }
-  }
+  } */
 
    stage("createnamespace")  {
       steps {
@@ -101,8 +101,15 @@ stage("prod-deploy") {
        sh '''
           minikube status || minikube start
            minikube addons enable ingress 
-          kubectl apply -f k8s-ymls/namespaces.yml || true 
-         helm upgrade --install py-app-release  k8s-ymls/dev/mychart/ -n dev          
+           kubectl wait --namespace ingress-nginx \
+              --for=condition=ready pod \
+              --selector=app.kubernetes.io/component=controller \
+              --timeout=120s
+
+ 
+         kubectl apply -f k8s-ymls/namespaces.yml || true 
+ 
+         helm upgrade --install py-app-release  k8s-ymls/dev/mychart/ -n dev           
          '''
      }
 
