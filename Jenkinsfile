@@ -108,6 +108,7 @@ stage("prod-deploy") {
          sleep 15
          kubectl apply -f namespaces.yml || true 
          kubectl apply -f argocd-apps/appset.yaml
+          kubectl apply -f argocd-apps/monitoring.yaml
        #  helm upgrade --install py-dev-app  mychart/ -n dev  -f mychart/values-dev.yaml
         # helm upgrade --install py-prod-app  mychart/ -n prod  -f mychart/values-prod.yaml
         # helm upgrade --install py-staging-app  mychart/ -n staging  -f mychart/values-staging.yaml
